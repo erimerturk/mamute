@@ -1,20 +1,18 @@
 package org.mamute.controllers;
 
-import javax.inject.Inject;
-
-import org.mamute.auth.DefaultAuthenticator;
-import org.mamute.auth.FacebookAuthService;
-import org.mamute.auth.GoogleAuthService;
-import org.mamute.brutauth.auth.rules.LoggedRule;
-import org.mamute.validators.LoginValidator;
-import org.mamute.validators.UrlValidator;
-
 import br.com.caelum.brutauth.auth.annotations.CustomBrutauthRules;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.routes.annotation.Routed;
+import org.mamute.auth.DefaultAuthenticator;
+import org.mamute.auth.FacebookAuthService;
+import org.mamute.brutauth.auth.rules.LoggedRule;
+import org.mamute.validators.LoginValidator;
+import org.mamute.validators.UrlValidator;
+
+import javax.inject.Inject;
 
 @Routed
 @Controller
@@ -22,7 +20,7 @@ public class AuthController extends BaseController {
 	
 	@Inject private DefaultAuthenticator auth;
 	@Inject private FacebookAuthService facebook;
-	@Inject private GoogleAuthService google;
+//	@Inject private GoogleAuthService google;
 	@Inject private Result result;
 	@Inject private UrlValidator urlValidator;
 	@Inject private LoginValidator validator;
@@ -30,12 +28,12 @@ public class AuthController extends BaseController {
 	@Get
 	public void loginForm(String redirectUrl) {
 		String facebookUrl = facebook.getOauthUrl(redirectUrl);
-		String googleUrl = google.getOauthUrl(redirectUrl);
+//		String googleUrl = google.getOauthUrl(redirectUrl);
 		if (redirectUrl != null && !redirectUrl.isEmpty()) {
 			include("redirectUrl", redirectUrl);
 		}
 		result.include("facebookUrl", facebookUrl);
-		result.include("googleUrl", googleUrl);
+//		result.include("googleUrl", googleUrl);
 	}
 	
 	@Post

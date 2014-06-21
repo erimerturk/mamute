@@ -1,17 +1,14 @@
 package org.mamute.auth;
 
+import br.com.caelum.vraptor.environment.Environment;
+import org.mamute.qualifiers.Facebook;
+import org.scribe.builder.ServiceBuilder;
+import org.scribe.builder.api.FacebookApi;
+import org.scribe.oauth.OAuthService;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
-
-import org.mamute.qualifiers.Facebook;
-import org.mamute.qualifiers.Google;
-import org.scribe.builder.ServiceBuilder;
-import org.scribe.builder.api.FacebookApi;
-import org.scribe.builder.api.Google2Api;
-import org.scribe.oauth.OAuthService;
-
-import br.com.caelum.vraptor.environment.Environment;
 public class OAuthServiceCreator {
 	
 	public static final String FACEBOOK_APP_SECRET = "facebook.app_secret";
@@ -50,16 +47,16 @@ public class OAuthServiceCreator {
 		return service;
 	}
 	
-	@Produces
-	@Google
-	public OAuthService getInstanceGoogle() {
-		this.service = new ServiceBuilder()
-		.provider(Google2Api.class)
-		.apiKey(env.get(GOOGLE_CLIENT_ID))
-		.apiSecret(env.get(GOOGLE_CLIENT_SECRET))
-		.callback(env.get(GOOGLE_REDIRECT_URI))
-		.scope("https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email")
-		.build();
-		return service;
-	}
+//	@Produces
+//	@Google
+//	public OAuthService getInstanceGoogle() {
+//		this.service = new ServiceBuilder()
+//		.provider(Google2Api.class)
+//		.apiKey(env.get(GOOGLE_CLIENT_ID))
+//		.apiSecret(env.get(GOOGLE_CLIENT_SECRET))
+//		.callback(env.get(GOOGLE_REDIRECT_URI))
+//		.scope("https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email")
+//		.build();
+//		return service;
+//	}
 }
